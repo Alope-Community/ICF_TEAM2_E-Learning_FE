@@ -17,6 +17,7 @@ import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
 import Video from "../commponents/Video";
 import Course from "../pages/Course";
+import Inrolment from "../pages/Inrolment";
 const ProtectedLogin = withAuthProtection(Login);
 
 function RouterHandler() {
@@ -29,9 +30,10 @@ function RouterHandler() {
         <Route path="/e-learning" element={<Elearning />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/e-learning/:id/:name" element={<Course />} />
+        <Route path="/e-learning/:id/course" element={<Course />} />
         <Route path="contact" element={<Contact />} />
         <Route path="video" element={<Video />} />
+        <Route path="/e-learning/:id/daftar-course" element={<Inrolment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>

@@ -53,7 +53,7 @@ const Navbar = () => {
         .catch(() => {
           return null;
         });
-    });
+    }, [isLoggedIn.token]);
   }
   // console.log(isLoggedIn);
 

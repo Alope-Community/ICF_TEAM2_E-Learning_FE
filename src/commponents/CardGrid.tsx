@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import api from "../utils/Api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CardGrid = () => {
   // Data untuk card
   const [dataCard, setDataCard] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Tambahkan loading state
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -23,6 +24,9 @@ const CardGrid = () => {
         setIsLoading(false); // Matikan loading setelah data diambil
       })
       .catch((error) => {
+        if (error.code == 403) {
+          return navigate("/dafter-course");
+        }
         console.error("Error fetching data:", error);
         setIsLoading(false); // Matikan loading meskipun gagal
       });
@@ -31,7 +35,7 @@ const CardGrid = () => {
   return (
     <div className="bg-gray-50 py-10 px-4 lg:px-28">
       <h1 className="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-8">
-        Daftar Materi Populer
+        Daftar Materi
       </h1>
 
       {isLoading ? (
