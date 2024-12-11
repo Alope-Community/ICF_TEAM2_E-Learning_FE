@@ -5,118 +5,67 @@ import { useNavigate } from "react-router-dom";
 const Video: React.FC = () => {
   const navigate = useNavigate();
 
-  const items = [
-    {
-      title: "Kemana Kita Akan Deploy",
-      time: "2:47",
-      locked: false,
-      route: "../",
-    },
-    {
-      title: "Setup Version Control",
-      time: "5:00",
-      locked: true,
-      route: "../",
-    },
-    {
-      title: "Deploy Ke Share Hosting",
-      time: "15:08",
-      locked: true,
-      route: "../",
-    },
-    {
-      title: "VPS, Forge, Custom Domain Dan SSL",
-      time: "19:41",
-      locked: true,
-      route: "../",
-    },
-    { title: "Last But Not Least", time: "6:00", locked: true, route: "/last" },
-    {
-      title: "Inertia Vite on Production",
-      time: "14:20",
-      locked: true,
-      route: "/vite-production",
-    },
-  ];
-
   return (
-    <div className="bg-white min-h-screen">
-      <Navbar></Navbar>
+    <div className="bg-black min-h-screen flex flex-col">
+      {/* Navbar */}
+      <Navbar />
 
-      {/* Main Content */}
-      <main className="px-4 md:px-8 mt-8">
-        <div className="flex flex-col md:flex-row">
-          {/* Sidebar */}
-          <aside className="hidden md:block bg-gray-100 rounded-lg p-4 md:w-1/4 md:mr-4">
-            <h2 className="text-lg font-semibold text-gray-700 mb-4">
-              Deploy Laravel Ke Server
-            </h2>
-            <ul className="space-y-2">
-              {items.map((item, index) => (
-                <li
-                  key={index}
-                  className={`flex items-center justify-between p-3 rounded-lg ${
-                    item.locked ? "bg-gray-300" : "bg-cyan-500 text-white"
-                  }`}
-                >
-                  <span>{item.title}</span>
-                  <span>{item.time}</span>
-                </li>
-              ))}
-            </ul>
-          </aside>
+      <div className="flex items-start justify-center">
+        {/* Sidebar */}
+        <div className="w-full sm:w-1/2 lg:w-1/4 rounded-lg bg-gray-900 h-[calc(100vh-4rem)] mt-8 fixed top-16 left-0 p-4 overflow-y-auto">
+          <h1 className="text-2xl font-bold text-center my-4 text-gray-200">
+            Daftar Materi
+          </h1>
+          {[
+            "1. Laravel",
+            "2. React Native",
+            "3. Vue.js",
+            "4. Tailwind CSS",
+            "5. JavaScript",
+            "6. Python",
+          ].map((materi) => (
+            <button
+              key={materi}
+              type="button"
+              className="bg-gray-800 px-6 text-left mt-2 py-3 rounded-lg font-semibold text-gray-200 shadow-md transition duration-300 ease-in-out transform hover:bg-gray-700 hover:scale-105 hover:text-white w-full"
+            >
+              {materi}
+            </button>
+          ))}
+        </div>
 
-          {/* Main Content */}
-          <section className="flex-1 bg-gray-50 rounded-lg p-4 w-full">
-            <h2 className="text-xl font-semibold mb-4">
-              Kemana Kita Akan Deploy
+        {/* Content Area */}
+        <div className="w-full sm:ml-[50%] lg:ml-[25%] p-4 space-y-8 mt-20">
+          <div className="bg-gray-800 p-4 rounded-lg">
+            <h2 className="text-2xl font-semibold text-white mb-4">
+              Video Pembelajaran
             </h2>
-            <div className="bg-black rounded-lg aspect-video mb-4">
-              <video
-                controls
-                className="w-full h-full rounded-lg"
-                poster="/path/to/video-thumbnail.png"
-              >
-                <source src="/path/to/video.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <div>
-              <h3 className="text-lg font-medium">Komentar</h3>
-              <p className="text-gray-600 mb-4">
-                Ada 5 komentar pada episode ini.
-              </p>
-              <textarea
-                className="w-full border border-gray-300 rounded-lg p-2 mb-4"
-                placeholder="Tambahkan komentar"
-              ></textarea>
-              <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg">
-                Kirim
+            <video
+              className="w-full h-auto rounded-lg"
+              controls
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
+            ></video>
+          </div>
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold text-white">Komentar</h2>
+              <button className="bg-green-500 px-4 py-2 rounded-lg font-semibold text-white shadow-md transition duration-300 ease-in-out transform hover:bg-green-600 hover:rotate-3 hover:scale-105">
+                Upload Tugas
               </button>
             </div>
-            <ul className="mt-4 space-y-4">
-              {[
-                {
-                  name: "Yandi Novriandi",
-                  comment: "Playlist baru lagi bang",
-                  time: "3h",
-                },
-                {
-                  name: "Irsyad A. Panjaitan",
-                  comment: "Iya bang. Gaskeun.",
-                  time: "3h",
-                },
-              ].map((comment, index) => (
-                <li key={index} className="bg-gray-100 p-4 rounded-lg">
-                  <p className="font-bold">{comment.name}</p>
-                  <p className="text-gray-600">{comment.comment}</p>
-                  <p className="text-gray-500 text-sm">{comment.time}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
+
+            <textarea
+              className="w-full h-20 p-4 border border-gray-600 rounded-lg shadow-sm text-gray-200 bg-gray-900/50 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4"
+              placeholder="Tambahkan komentar..."
+            ></textarea>
+            <div className="flex justify-end gap-4">
+              <button className="bg-blue-500 px-4 py-2 rounded-lg font-semibold text-white shadow-md transition duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105">
+                Upload Komentar
+              </button>
+            </div>
+          </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

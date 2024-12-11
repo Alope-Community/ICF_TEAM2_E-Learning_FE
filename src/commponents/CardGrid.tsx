@@ -2,12 +2,15 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import api from "../utils/Api";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const CardGrid = () => {
   // Data untuk card
   const [dataCard, setDataCard] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Tambahkan loading state
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     axios
@@ -24,16 +27,70 @@ const CardGrid = () => {
         setIsLoading(false); // Matikan loading setelah data diambil
       })
       .catch((error) => {
-        if (error.code == 403) {
-          return navigate("/dafter-course");
-        }
         console.error("Error fetching data:", error);
         setIsLoading(false); // Matikan loading meskipun gagal
       });
-  }, []); // Dependency array kosong agar hanya dijalankan sekali
+  }, []);
+
+  const handleClick = (id) => {
+    if (token) {
+      axios
+        .request({
+          url: api + `course-category/${id}/enrolment`,
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          toast.success(response.data.message, {
+            position: "top-right",
+            autoClose: 500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+
+          setTimeout(() => {
+            navigate(`/e-learning/${id}/course`);
+          }, 1500);
+        })
+        .catch((err) => {
+          toast.error(err.message, {
+            position: "top-right",
+            autoClose: 500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        });
+    } else {
+      toast.error("Maaf Anda Belum Login", {
+        position: "top-right",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    }
+  };
 
   return (
     <div className="bg-gray-50 py-10 px-4 lg:px-28">
+      <ToastContainer />
       <h1 className="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-8">
         Daftar Materi
       </h1>
@@ -43,8 +100,10 @@ const CardGrid = () => {
       ) : dataCard.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {dataCard.map((data, index) => (
-            <Link
-              to={`/e-learning/${data.id}/course`}
+            <button
+              onClick={() => {
+                handleClick(data.id);
+              }}
               key={index}
               className="block"
             >
@@ -61,7 +120,7 @@ const CardGrid = () => {
                   <p>{data.description}</p>
                 </div>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
       ) : (
