@@ -18,6 +18,8 @@ import Contact from "../pages/Contact";
 import Video from "../commponents/Video";
 import Course from "../pages/Course";
 import Inrolment from "../pages/Inrolment";
+import CourseCategory from "../pages/CourseDetail";
+import UbahPassword from "../pages/UbahPassword";
 const ProtectedLogin = withAuthProtection(Login);
 
 function RouterHandler() {
@@ -27,13 +29,17 @@ function RouterHandler() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/ubah-password" element={<UbahPassword />} />
         <Route path="/e-learning" element={<Elearning />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/e-learning/:id/course" element={<Course />} />
+        <Route
+          path="/e-learning/:id/course-detail"
+          element={<CourseCategory />}
+        />
         <Route path="contact" element={<Contact />} />
         <Route path="video" element={<Video />} />
-        <Route path="/e-learning/:id/daftar-course" element={<Inrolment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>

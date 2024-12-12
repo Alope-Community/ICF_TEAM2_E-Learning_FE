@@ -109,7 +109,7 @@ const CardGrid = () => {
             >
               <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
                 <img
-                  src={data.image}
+                  src={`${data.image}`}
                   alt={data.name}
                   className="w-20 h-20 mx-auto mb-4"
                 />

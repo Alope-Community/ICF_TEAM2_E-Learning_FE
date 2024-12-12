@@ -1,7 +1,4 @@
-// import React from "react";
-// import ContentLearning from "../commponents/ContentLearning";
 import Navbar from "../commponents/Navbar";
-import Content from "../commponents/Content";
 import Program from "../commponents/Program";
 import Footer from "../commponents/Footer";
 import CardGrid from "../commponents/CardGrid";

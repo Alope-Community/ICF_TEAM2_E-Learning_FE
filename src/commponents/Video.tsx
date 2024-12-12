@@ -7,7 +7,6 @@ const Video: React.FC = () => {
 
   return (
     <div className="bg-black min-h-screen flex flex-col">
-      {/* Navbar */}
       <Navbar />
 
       <div className="flex items-start justify-center">

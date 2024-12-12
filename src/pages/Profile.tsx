@@ -1,17 +1,74 @@
 import Navbar from "../commponents/Navbar";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import api from "../utils/Api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const Profile = () => {
+  const [updateProfile, setUpdateProfile] = useState();
+  const isLoggedIn = localStorage.getItem("token")?.toString();
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({
     name: "",
     email: "",
   });
-  const isLoggedIn = localStorage.getItem("token")?.toString();
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const data = {
+      name,
+      email,
+      gender,
+      phone,
+    };
+
+    axios
+      .request({
+        url: api + "settings/update-profil",
+        data: data,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${isLoggedIn}`,
+        },
+      })
+      .then((res) => {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        setTimeout(() => {
+          navigate("/profile");
+        }, 1000);
+      })
+      .catch((err) => {
+        // console.log(err)
+        toast.error(err.response.data.message, {
+          position: "top-right",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  };
 
   if (isLoggedIn) {
     useEffect(() => {
@@ -36,7 +93,7 @@ const Profile = () => {
         .catch((err) => {
           navigate("/");
         });
-    });
+    }, [isLoggedIn]);
   } else {
     navigate("/");
   }
@@ -74,20 +131,20 @@ const Profile = () => {
                     </h2>
                     <ul className="space-y-4">
                       <li>
-                        <a
-                          href="#"
+                        <Link
+                          to="/profile"
                           className="block text-cyan-500 font-medium hover:underline"
                         >
                           Profil Saya
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="#"
+                        <Link
+                          to="/ubah-password"
                           className="block text-gray-700 hover:text-cyan-500 hover:underline"
                         >
-                          Kelas yang di ikuti
-                        </a>
+                          Ubah Password
+                        </Link>
                       </li>
                     </ul>
                   </div>
@@ -95,7 +152,7 @@ const Profile = () => {
 
                 {/* Profile Form */}
                 <div className="w-full lg:w-3/4">
-                  <form className="space-y-6">
+                  <form className="space-y-6" onSubmit={handleSubmit}>
                     {/* Nama & Tanggal Lahir */}
                     <div className="flex flex-col lg:flex-row gap-6">
                       <div className="w-full">
@@ -104,8 +161,12 @@ const Profile = () => {
                         </label>
                         <input
                           type="text"
+                          name="name"
                           className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                           placeholder="Nama Lengkap"
+                          onChange={(e) =>
+                            setName(e ? e.target.value : profile.name)
+                          }
                           defaultValue={profile.name}
                         />
                       </div>
@@ -114,7 +175,9 @@ const Profile = () => {
                           Email
                         </label>
                         <input
-                          type="text"
+                          type="email"
+                          name="email"
+                          onChange={(e) => setEmail(e.target.value)}
                           className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                           placeholder="Email"
                           defaultValue={profile.email}
@@ -128,7 +191,11 @@ const Profile = () => {
                         <label className="block text-gray-700 mb-2">
                           Gender
                         </label>
-                        <select className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none">
+                        <select
+                          name="gender"
+                          className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                          onChange={(e) => setGender(e.target.value)}
+                        >
                           <option value="Laki-laki">Laki-laki</option>
                           <option value="Perempuan">Perempuan</option>
                         </select>
@@ -138,33 +205,12 @@ const Profile = () => {
                           No. HP
                         </label>
                         <input
-                          type="text"
+                          type="number"
+                          name="phone"
+                          onChange={(e) => setPhone(e.target.value)}
                           className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                           placeholder="No. HP"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Peluang & CV */}
-                    <div className="flex flex-col lg:flex-row gap-6">
-                      <div className="w-full">
-                        <label className="block text-gray-700 mb-2">
-                          Peluang yang Dicari
-                        </label>
-                        <input
-                          type="text"
-                          className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
-                          placeholder="Silahkan pilih salah satu atau ketik langsung di sini.."
-                        />
-                      </div>
-                      <div className="w-full">
-                        <label className="block text-gray-700 mb-2">
-                          Link CV / Profil LinkedIn
-                        </label>
-                        <input
-                          type="text"
-                          className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
-                          placeholder="https://drive.google.com/..."
+                          defaultValue={profile.phone}
                         />
                       </div>
                     </div>
@@ -172,16 +218,10 @@ const Profile = () => {
                     {/* Buttons */}
                     <div className="flex gap-4">
                       <button
-                        type="button"
+                        type="submit"
                         className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition"
                       >
-                        Ubah Email
-                      </button>
-                      <button
-                        type="button"
-                        className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition"
-                      >
-                        Ubah Password
+                        Update Profile
                       </button>
                     </div>
                   </form>

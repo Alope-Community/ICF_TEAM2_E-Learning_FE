@@ -30,27 +30,27 @@ const Materi = () => {
               </p>
               <ul className="text-left space-y-2 mb-6 text-sm">
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✔</span>
+                  <span className="text-cyan-500 mr-2">✔</span>
                   <span>
                     Belajar fleksibel via Video Materi, Bahan Bacaan, Project,
                     dan Studi Kasus
                   </span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✔</span>
+                  <span className="text-cyan-500 mr-2">✔</span>
                   <span>
                     Praktikal & Actionable. Bertahap dari level Dasar hingga
                     Lanjut
                   </span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✔</span>
+                  <span className="text-cyan-500 mr-2">✔</span>
                   <span>
                     Grup Komunitas Diskusi Lifetime. Kelas Gratis Tiap Bulannya
                   </span>
                 </li>
               </ul>
-              <button className="bg-teal-700 text-white px-4 py-2 rounded-lg text-lg hover:bg-teal-800">
+              <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg text-lg hover:bg-cyan-500">
                 Lihat Ratusan Materi
               </button>
             </div>
@@ -67,27 +67,27 @@ const Materi = () => {
               </p>
               <ul className="text-left space-y-2 mb-6 text-sm">
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✔</span>
+                  <span className="text-cyan-500 mr-2">✔</span>
                   <span>
                     Belajar fleksibel via Video Materi, Bahan Bacaan, Project,
                     dan Studi Kasus
                   </span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✔</span>
+                  <span className="text-cyan-500 mr-2">✔</span>
                   <span>
                     Praktikal & Actionable. Bertahap dari level Dasar hingga
                     Lanjut
                   </span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✔</span>
+                  <span className="text-cyan-500 mr-2">✔</span>
                   <span>
                     Grup Komunitas Diskusi Lifetime. Kelas Gratis Tiap Bulannya
                   </span>
                 </li>
               </ul>
-              <button className="bg-teal-700 text-white px-4 py-2 rounded-lg text-lg hover:bg-teal-800">
+              <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg text-lg hover:bg-cyan-500">
                 Lihat Ratusan Materi
               </button>
             </div>
