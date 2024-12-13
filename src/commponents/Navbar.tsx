@@ -5,7 +5,6 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../utils/Api";
-import { useAuth } from "../auth/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +23,6 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const navigate = useNavigate();
-  const { clearToken } = useAuth();
 
   const [profile, setProfile] = useState({
     name: "",
@@ -79,7 +77,6 @@ const Navbar = () => {
           draggable: true,
           progress: undefined,
         });
-        clearToken();
         localStorage.removeItem("token");
         setTimeout(() => {
           navigate("/login");

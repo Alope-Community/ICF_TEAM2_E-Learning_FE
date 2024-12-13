@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../commponents/Navbar";
 import axios, { formToJSON } from "axios";
 import api from "../utils/Api";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const CourseCategory = () => {
   const dataId = useParams();
@@ -14,6 +14,7 @@ const CourseCategory = () => {
   // untuk tugas Dan Komentar
   const [task, setTask] = useState();
   const [grade, setGrade] = useState();
+  const [submited, setSubmited] = useState();
   const [discusion, setDiscusion] = useState([]);
 
   if (isLoggedIn) {
@@ -33,7 +34,8 @@ const CourseCategory = () => {
           setData(res.data.course);
           setTask(res.data.task);
           setDiscusion(res.data.discussion);
-          setDiscusion(res.data.grade);
+          setGrade(res.data.grade);
+          setSubmited(res.data.submited);
           setIsLoading(false); // Set loading ke false setelah request selesai
         })
         .catch((err) => {
@@ -67,7 +69,7 @@ const CourseCategory = () => {
     try {
       axios
         .request({
-          url: api + `task/${dataId.id}/submited`,
+          url: api + `task/${task.id}/submited`,
           method: "POST",
           data: formData,
           headers: {
@@ -76,7 +78,24 @@ const CourseCategory = () => {
           },
         })
         .then((res) => {
-          console.log(res);
+          toast.success(res.data.message, {
+            position: "top-right",
+            autoClose: 500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message, {
+            position: "top-right",
+            autoClose: 500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
         });
     } catch {}
   };
@@ -89,6 +108,7 @@ const CourseCategory = () => {
 
         {/* Main Content */}
         <main className="px-4 md:px-8 mt-8 lg:px-28">
+          <ToastContainer />
           {isLoading ? ( // Tampilkan loading saat request berjalan
             <p className="text-center text-lg mt-24">Loading...</p>
           ) : data.id ? ( // Tampilkan data jika tersedia
@@ -117,7 +137,7 @@ const CourseCategory = () => {
                   <div className="lg:h-[px-400px] h-[300px] rounded-lg mx-5">
                     <iframe
                       className="w-full lg:h-[300px] h-[300px] rounded-lg"
-                      src="https://www.youtube.com/embed/sAHcNLKWaa4"
+                      src={data.course}
                       title="YouTube video player"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
@@ -198,39 +218,59 @@ const CourseCategory = () => {
                   <h2 className="text-xl font-semibold mb-6 text-gray-800">
                     Tugas
                   </h2>
-                  {task[0] ? (
+                  {task ? (
                     <>
                       <p className="text-sm font-medium text-gray-700">
-                        {task[0].task}
+                        {task.task}
                       </p>
                       <form onSubmit={handleFileUpload}>
                         <div className="mt-5">
                           <div className="items-start">
-                            <label
-                              htmlFor="name"
-                              className="block text-sm text-gray-700 mb-2"
-                            >
-                              Masukkan File Berbentuk Pdf.
-                            </label>
-                            <input
-                              type="file"
-                              name="file"
-                              onChange={(e) => {
-                                const selectedFile = e.target.files[0]; // Ambil file pertama
-                                setFile(selectedFile); // Simpan file ke state
-                              }}
-                              accept="application/pdf"
-                              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
-                              required
-                            />
+                            {submited != null ? (
+                              <>
+                                <label
+                                  htmlFor="name"
+                                  className="block text-sm text-gray-700 mb-2"
+                                >
+                                  Anda Telah Mengumpulkan Dan Mendapatkan Nilai
+                                  : {grade ? grade.grade : "Belum Di Nilai"}.
+                                </label>
+                              </>
+                            ) : (
+                              <>
+                                <label
+                                  htmlFor="name"
+                                  className="block text-sm text-gray-700 mb-2"
+                                >
+                                  Masukkan File Berbentuk Pdf.
+                                </label>
+                                <input
+                                  type="file"
+                                  name="file"
+                                  onChange={(e) => {
+                                    const selectedFile = e.target.files[0]; // Ambil file pertama
+                                    setFile(selectedFile); // Simpan file ke state
+                                  }}
+                                  accept="application/pdf"
+                                  className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                                  required
+                                />
+                              </>
+                            )}
                           </div>
                         </div>
-                        <button
-                          type="submit"
-                          className="bg-cyan-500 text-white px-2 py-2 rounded-lg mt-5"
-                        >
-                          Upload Tugas
-                        </button>
+                        {submited != null ? (
+                          <></>
+                        ) : (
+                          <>
+                            <button
+                              type="submit"
+                              className="bg-cyan-500 text-white px-2 py-2 rounded-lg mt-5"
+                            >
+                              Upload Tugas
+                            </button>
+                          </>
+                        )}
                       </form>
                     </>
                   ) : (

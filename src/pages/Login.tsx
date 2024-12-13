@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { useAuth } from "../auth/AuthContext";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,7 +11,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setToken } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   // const { login } = useContext(AuthContext);
 
@@ -29,9 +27,6 @@ const Login = () => {
       );
       const token = response.data.data.token;
 
-      // const { user, token } = response.data.data;
-
-      // login({ user, token });
       toast.success(response.data.message, {
         position: "top-right",
         autoClose: 500,
@@ -41,8 +36,7 @@ const Login = () => {
         draggable: true,
         progress: undefined,
       });
-      // localStorage.setItem("token", token);
-      setToken(token);
+      localStorage.setItem("token", token);
       setTimeout(() => {
         navigate("/");
       }, 1000);
