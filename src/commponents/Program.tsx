@@ -14,7 +14,7 @@ const Program = () => {
             {/* Gambar Header (disembunyikan di mobile) */}
             <div className="hidden lg:flex lg:w-1/2 justify-center mb-8 lg:mb-0">
               <img
-                src="/headers/head-meja.png"
+                src="/headers/head-orang.png"
                 className="w-3/4 mr-36 lg:w-3/5"
                 alt="Header"
               />
@@ -53,25 +53,25 @@ const Program = () => {
                     story: "Diterima Kerja Sebagai HRD",
                   },
                   {
-                    image: "/headers/head-meja.png",
+                    image: "/headers/head-laptop.png",
                     name: "Muhammad Rizqullah",
                     role: "Marketing Intern",
                     story: "Lolos 12 Tempat Magang",
                   },
                   {
-                    image: "/headers/head-meja.png",
+                    image: "/headers/head-kursi.png",
                     name: "Siti Mustika Ayu",
                     role: "Data Analyst",
                     story: "Diterima Jadi Data Analyst",
                   },
                   {
-                    image: "/headers/head-meja.png",
+                    image: "/headers/head-papan.png",
                     name: "Bram Arya Setiawan",
                     role: "Magang BUMN",
                     story: "Diterima Magang BUMN",
                   },
                   {
-                    image: "/headers/head-meja.png",
+                    image: "/headers/home.png",
                     name: "Rindi Agustiana",
                     role: "Copywriter",
                     story: "Diterima Jadi Copywriter",

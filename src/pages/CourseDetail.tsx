@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../commponents/Navbar";
-import axios from "axios";
+import axios, { formToJSON } from "axios";
 import api from "../utils/Api";
+import { toast } from "react-toastify";
 
 const CourseCategory = () => {
   const dataId = useParams();
@@ -12,6 +13,7 @@ const CourseCategory = () => {
   const navigate = useNavigate();
   // untuk tugas Dan Komentar
   const [task, setTask] = useState();
+  const [grade, setGrade] = useState();
   const [discusion, setDiscusion] = useState([]);
 
   if (isLoggedIn) {
@@ -31,6 +33,7 @@ const CourseCategory = () => {
           setData(res.data.course);
           setTask(res.data.task);
           setDiscusion(res.data.discussion);
+          setDiscusion(res.data.grade);
           setIsLoading(false); // Set loading ke false setelah request selesai
         })
         .catch((err) => {
@@ -38,8 +41,45 @@ const CourseCategory = () => {
         });
     }, [isLoggedIn, dataId.id]);
   } else {
-    navigate("/e-learning/");
+    return navigate("/e-learning/");
   }
+
+  const [file, setFile] = useState(null);
+
+  const handleFileUpload = async (e) => {
+    e.preventDefault();
+
+    if (!file) {
+      toast.error("Masukan File", {
+        position: "top-right",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    console.log(formData.entries());
+    try {
+      axios
+        .request({
+          url: api + `task/${dataId.id}/submited`,
+          method: "POST",
+          data: formData,
+          headers: {
+            Authorization: `Bearer ${isLoggedIn}`,
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    } catch {}
+  };
 
   useEffect;
   return (
@@ -67,7 +107,6 @@ const CourseCategory = () => {
                         navigate(-1);
                       }}
                       className="bg-cyan-500 text-white px-2 py-2 rounded-lg mt-3"
-                      data-aos="fade-up"
                     >
                       Kembali
                     </button>
@@ -118,7 +157,6 @@ const CourseCategory = () => {
                     <button
                       type="submit"
                       className="bg-cyan-500 text-white px-4 py-2 rounded-lg mt-5"
-                      data-aos="fade-up"
                     >
                       Kirim Komentar
                     </button>
@@ -165,7 +203,7 @@ const CourseCategory = () => {
                       <p className="text-sm font-medium text-gray-700">
                         {task[0].task}
                       </p>
-                      <form action="">
+                      <form onSubmit={handleFileUpload}>
                         <div className="mt-5">
                           <div className="items-start">
                             <label
@@ -176,7 +214,12 @@ const CourseCategory = () => {
                             </label>
                             <input
                               type="file"
-                              id="name"
+                              name="file"
+                              onChange={(e) => {
+                                const selectedFile = e.target.files[0]; // Ambil file pertama
+                                setFile(selectedFile); // Simpan file ke state
+                              }}
+                              accept="application/pdf"
                               className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                               required
                             />
@@ -185,7 +228,6 @@ const CourseCategory = () => {
                         <button
                           type="submit"
                           className="bg-cyan-500 text-white px-2 py-2 rounded-lg mt-5"
-                          data-aos="fade-up"
                         >
                           Upload Tugas
                         </button>

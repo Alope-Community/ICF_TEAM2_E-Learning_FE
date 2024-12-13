@@ -5,8 +5,12 @@ import Footer from "../commponents/Footer";
 import Learning from "../commponents/Learning";
 import Navbar from "../commponents/Navbar";
 import Materi from "../commponents/Materi";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Home = () => {
+
+
   return (
     <div>
       <div>

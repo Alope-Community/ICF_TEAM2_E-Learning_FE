@@ -61,17 +61,11 @@ const Course = () => {
         <div className="mt-20 lg:mt-24 lg:px-28">
           <div className="bg-white max-h-content p-4 md:p-8">
             <div className="w-full flex flex-col lg:flex-row items-center">
-              <div
-                className="w-full text-center lg:text-left"
-                data-aos="fade-right"
-              >
-                <h1
-                  className="font-bold text-slate-800 text-lg md:text-2xl"
-                  data-aos="fade-up"
-                >
+              <div className="w-full text-center lg:text-left">
+                <h1 className="font-bold text-slate-800 text-lg md:text-2xl">
                   {dataCategory.title}
                 </h1>
-                <p className="text-base font-medium mt-2" data-aos="fade-up">
+                <p className="text-base font-medium mt-2">
                   {dataCategory.description}
                 </p>
                 <div className="mt-10">
@@ -82,7 +76,6 @@ const Course = () => {
                       }, 1500);
                     }}
                     className="bg-cyan-500 text-white px-4 py-3 rounded-lg mt-3"
-                    data-aos="fade-up"
                   >
                     Kembali
                   </button>

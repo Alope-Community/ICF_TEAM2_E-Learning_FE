@@ -14,7 +14,7 @@ const Materi = () => {
             {/* Gambar */}
             <div className="flex-shrink-0 w-full md:w-auto">
               <img
-                src="/headers/head-meja.png" // Ganti dengan URL gambar E-learning
+                src="/headers/head-laptop.png" // Ganti dengan URL gambar E-learning
                 alt="E-learning"
                 className="max-w-full w-full md:w-80"
               />
