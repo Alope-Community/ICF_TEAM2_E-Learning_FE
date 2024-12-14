@@ -4,6 +4,7 @@ import Navbar from "../commponents/Navbar";
 import axios, { formToJSON } from "axios";
 import api from "../utils/Api";
 import { toast, ToastContainer } from "react-toastify";
+import Course from "./Course";
 
 const CourseCategory = () => {
   const dataId = useParams();
@@ -16,7 +17,9 @@ const CourseCategory = () => {
   const [grade, setGrade] = useState();
   const [submited, setSubmited] = useState();
   const [discusion, setDiscusion] = useState([]);
+  const [postDiscussion, setPostDiscussion] = useState();
 
+  // For Get data detail course
   if (isLoggedIn) {
     useEffect(() => {
       setIsLoading(true); // Set loading ke true sebelum request
@@ -46,8 +49,54 @@ const CourseCategory = () => {
     return navigate("/e-learning/");
   }
 
+  // ForPost Task
   const [file, setFile] = useState(null);
+  // for set data diskusi
+  const handleChangeDiscusion = (e) => {
+    setPostDiscussion(e.target.value);
+  };
 
+  // for post data diskusi
+  const discussion = async (e) => {
+    e.preventDefault();
+    let formData = {
+      discussion: postDiscussion,
+    };
+    axios
+      .request({
+        url: api + `course/${data.id}/discussion`,
+        method: "POST",
+        data: formData,
+        headers: {
+          Authorization: `Bearer ${isLoggedIn}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      .then((res) => {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        window.location.reload();
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          position: "top-right",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      });
+  };
+
+  // for post file submited
   const handleFileUpload = async (e) => {
     e.preventDefault();
 
@@ -86,6 +135,7 @@ const CourseCategory = () => {
             pauseOnHover: true,
             draggable: true,
           });
+          window.location.reload();
         })
         .catch((err) => {
           toast.error(err.response.data.message, {
@@ -100,7 +150,6 @@ const CourseCategory = () => {
     } catch {}
   };
 
-  useEffect;
   return (
     <>
       <div className="bg-white">
@@ -155,7 +204,7 @@ const CourseCategory = () => {
                   </h2>
 
                   {/* Comment Form */}
-                  <form>
+                  <form onSubmit={discussion}>
                     <div className="mt-5">
                       <div className="items-start">
                         <label
@@ -166,6 +215,8 @@ const CourseCategory = () => {
                         </label>
                         <textarea
                           id="comment"
+                          name="discussion"
+                          onChange={handleChangeDiscusion}
                           placeholder="Tulis komentar Anda di sini"
                           className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                           rows={4}
@@ -178,37 +229,47 @@ const CourseCategory = () => {
                       type="submit"
                       className="bg-cyan-500 text-white px-4 py-2 rounded-lg mt-5"
                     >
-                      Kirim Komentar
+                      Kirim Pertanyan
                     </button>
                   </form>
 
                   {/* Displaying the list of comments */}
                   <div className="mt-6">
                     <h3 className="text-lg font-semibold text-gray-800">
-                      Komentar Terbaru
+                      Ajukan Pertanyaan Anda
                     </h3>
                     <div className="mt-3">
-                      {/* Example Comment */}
-                      <div className="bg-gray-100 p-4 rounded-lg shadow-sm mb-4">
-                        <p className="text-sm font-medium text-gray-700">
-                          John Doe
-                        </p>
-                        <p className="text-sm text-gray-600 mt-2">
-                          Komentar pertama saya! Ini adalah diskusi yang sangat
-                          menarik.
-                        </p>
-                      </div>
-
-                      {/* Another example comment */}
-                      <div className="bg-gray-100 p-4 rounded-lg shadow-sm mb-4">
-                        <p className="text-sm font-medium text-gray-700">
-                          Jane Smith
-                        </p>
-                        <p className="text-sm text-gray-600 mt-2">
-                          Komentar kedua saya! Saya sangat setuju dengan
-                          pandangan ini.
-                        </p>
-                      </div>
+                      {discusion.map((item) => (
+                        <div
+                          key={item.id}
+                          className="bg-gray-100 p-4 rounded-lg shadow-sm mb-4"
+                        >
+                          <p className="text-sm font-medium text-gray-700">
+                            {item.user.name}
+                          </p>
+                          <p className="text-sm text-gray-600 mt-2">
+                            {item.discussion}
+                          </p>
+                          {item.reply ? (
+                            <div className="mt-2 bg-white p-2 rounded-lg shadow">
+                              <p className="text-sm font-medium text-gray-500">
+                                Balasan:
+                              </p>
+                              <p className="text-sm text-gray-600">
+                                {item.reply.message}
+                              </p>
+                            </div>
+                          ) : (
+                            <>
+                              <div className="mt-2 bg-white p-2 rounded-lg shadow">
+                                <p className="text-sm font-medium text-gray-500">
+                                  Belum Ada Jawaban
+                                </p>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>

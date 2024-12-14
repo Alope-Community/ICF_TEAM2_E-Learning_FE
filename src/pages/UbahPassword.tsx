@@ -67,7 +67,9 @@ const UbahPassword = () => {
       <div className="lg:mt-20 min-h-screen mt-10 bg-gray-50 flex flex-col items-center py-8 px-4 sm:px-8 md:px-12 lg:px-16">
         <div className="max-w-5xl w-full sm:w-[90%] md:w-[75%] lg:w-[600px] bg-white shadow-md rounded-lg p-6 md:p-8 lg:p-12">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-semibold text-gray-800">Ubah Password</h1>
+            <h1 className="text-2xl font-semibold text-gray-800">
+              Ubah Password
+            </h1>
           </div>
 
           <div className="flex flex-col md:flex-row gap-6 md:gap-8">
@@ -99,7 +101,9 @@ const UbahPassword = () => {
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-6">
                   <div className="w-full">
-                    <label className="block text-gray-700 mb-2">Password Lama</label>
+                    <label className="block text-gray-700 mb-2">
+                      Password Lama
+                    </label>
                     <input
                       type="password"
                       className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
@@ -110,7 +114,9 @@ const UbahPassword = () => {
                   </div>
 
                   <div className="w-full">
-                    <label className="block text-gray-700 mb-2">Password Baru</label>
+                    <label className="block text-gray-700 mb-2">
+                      Password Baru
+                    </label>
                     <input
                       type="password"
                       className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
@@ -121,7 +127,9 @@ const UbahPassword = () => {
                   </div>
 
                   <div className="w-full">
-                    <label className="block text-gray-700 mb-2">Konfirmasi Password</label>
+                    <label className="block text-gray-700 mb-2">
+                      Konfirmasi Password
+                    </label>
                     <input
                       type="password"
                       className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
