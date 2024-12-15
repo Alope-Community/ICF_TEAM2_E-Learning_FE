@@ -5,7 +5,7 @@ const Materi = () => {
     <>
       <div className="bg-gray-50 py-16 px-4 md:px-8">
         <h2 className="text-2xl lg:text-3xl font-bold text-gray-800 text-center mb-12">
-          Berbagai Program MySkill
+          Berbagai Program <span className="text-cyan-500">E-</span>Lope
         </h2>
 
         <div className="gap-8 lg:gap-16 md:grid-cols-2 items-center">
@@ -23,30 +23,31 @@ const Materi = () => {
             {/* Konten */}
             <div>
               <h3 className="text-xl font-semibold text-gray-700 mb-4">
-                E-learning
+                E-learning Platform
               </h3>
               <p className="text-gray-600 mb-4 font-semibold text-sm">
-                Pelajari Ratusan Skill Sekali Bayar. Praktik dan Bersertifikat:
+                Kembangkan Potensi Anda dengan Ratusan materi
               </p>
               <ul className="text-left space-y-2 mb-6 text-sm">
                 <li className="flex items-start">
                   <span className="text-cyan-500 mr-2">✔</span>
                   <span>
-                    Belajar fleksibel via Video Materi, Bahan Bacaan, Project,
-                    dan Studi Kasus
+                    Akses pembelajaran interaktif melalui video, materi bacaan,
+                    dan studi kasus nyata.
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-cyan-500 mr-2">✔</span>
                   <span>
-                    Praktikal & Actionable. Bertahap dari level Dasar hingga
-                    Lanjut
+                    Belajar dari dasar hingga mahir dengan pendekatan yang
+                    praktikal dan terstruktur.
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-cyan-500 mr-2">✔</span>
                   <span>
-                    Grup Komunitas Diskusi Lifetime. Kelas Gratis Tiap Bulannya
+                    Ikuti komunitas pembelajar aktif untuk diskusi tanpa batas
+                    dan kelas gratis rutin.
                   </span>
                 </li>
               </ul>
@@ -63,27 +64,27 @@ const Materi = () => {
                 E-learning
               </h3>
               <p className="text-gray-600 mb-4 font-semibold text-sm">
-                Pelajari Ratusan Skill Sekali Bayar. Praktik dan Bersertifikat:
+                Pelajari Ratusan Skill Secara gratis:
               </p>
               <ul className="text-left space-y-2 mb-6 text-sm">
                 <li className="flex items-start">
                   <span className="text-cyan-500 mr-2">✔</span>
                   <span>
                     Belajar fleksibel via Video Materi, Bahan Bacaan, Project,
-                    dan Studi Kasus
+                    dan Studi Kasus.
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-cyan-500 mr-2">✔</span>
                   <span>
                     Praktikal & Actionable. Bertahap dari level Dasar hingga
-                    Lanjut
+                    Lanjut.
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-cyan-500 mr-2">✔</span>
                   <span>
-                    Grup Komunitas Diskusi Lifetime. Kelas Gratis Tiap Bulannya
+                    Grup Komunitas Diskusi Lifetime. Kelas secara Gratis.
                   </span>
                 </li>
               </ul>
