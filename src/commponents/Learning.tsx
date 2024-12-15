@@ -5,30 +5,30 @@ const Learning = () => {
   const materials = [
     {
       id: 1,
-      title: "HTML Basics",
-      image: "/img/1.png",
-      description: "Memahami struktur dasar HTML untuk membangun halaman web.",
+      title: "Fleksibilitas Waktu dan Lokasi",
+      image: "/headers/head-laptop.png",
+      description: "Pengguna dapat belajar kapan saja dan di mana saja melalui perangkat desktop atau mobile.",
     },
     {
       id: 2,
-      title: "CSS Fundamentals",
-      image: "/img/2.png",
+      title: "Personalisasi Pembelajaran",
+      image: "/headers/head-kursi.png",
       description:
-        "Belajar styling halaman web dengan CSS untuk membuat tampilan menarik.",
+        "Sistem memberikan rekomendasi kursus berdasarkan minat dan kebutuhan pengguna, membantu mereka fokus pada materi yang relevan.",
     },
     {
       id: 3,
-      title: "JavaScript Intro",
-      image: "/img/3.png",
+      title: "Interaktivitas dan Kolaborasi",
+      image: "/headers/head-orang.png",
       description:
-        "Pengenalan JavaScript untuk menambahkan interaktivitas pada halaman web.",
+        "Pengguna dapat berpartisipasi dalam forum diskusi, mengajukan pertanyaan kepada instruktur, dan bekerja sama dengan sesama pelajar.",
     },
     {
       id: 4,
-      title: "React Components",
-      image: "/img/4.png",
+      title: "Evaluasi dan Penghargaan",
+      image: "/headers/head-papan.png",
       description:
-        "Mempelajari dasar-dasar komponen React untuk pengembangan aplikasi web modern.",
+        "Dengan kuis, tes, dan tugas, pengguna dapat mengevaluasi kemajuan mereka.",
     },
   ];
 
