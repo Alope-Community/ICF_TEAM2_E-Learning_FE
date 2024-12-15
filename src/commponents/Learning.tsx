@@ -39,7 +39,7 @@ const Learning = () => {
     <div className="p-8 min-h-screen w-full flex flex-col items-center justify-center bg-gray-50">
       <div className="w-full max-w-6xl text-center">
         <h2 className="text-3xl font-bold mb-8 text-gray-800">
-          Belajar Materi Web Development
+          Tujuan <span className="text-cyan-500">E-</span>Lope
         </h2>
       </div>
 
